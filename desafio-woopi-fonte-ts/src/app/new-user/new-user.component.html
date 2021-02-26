@@ -1,0 +1,89 @@
+
+
+<table id="table" *ngIf="getRegister()">
+    <tbody>
+        <tr [ngClass]="nameValid() ? 'backgroundRight' : 'backgroundErrors'">
+            <td>Nome</td>
+            <td><input type="text" [(ngModel)]="user.name"></td>
+            <td *ngIf="nameValid() == false" class="errors">*Nome inválido</td>
+        </tr>
+
+        <tr [ngClass]="lastNameValid() ? 'backgroundRight' : 'backgroundErrors'">
+            <td>Sobrenome</td>
+            <td><input type="text" [(ngModel)]="user.lastName"></td>
+            <td *ngIf="lastNameValid() == false" class="errors">*Sobrenome inválido</td>
+        </tr>
+
+        <tr [ngClass]="user.age >= 18 ? 'backgroundRight' : 'backgroundErrors'">
+            <td>Idade</td>
+            <td><input type="number" [(ngModel)]="user.age"></td>
+            <td *ngIf="user.age < 18" class="errors">*Idade inválida</td>
+        </tr>
+        
+        <tr [ngClass]="emailValid() ? 'backgroundRight' : 'backgroundErrors'">
+            <td>Email</td>
+            <td><input type="email" [(ngModel)]="user.email"></td>
+            <td *ngIf="emailValid() == false" class="errors">*Email inválido</td>
+        </tr>
+
+        <tr [ngClass]="addressValid() ? 'backgroundRight' : 'backgroundErrors'">
+            <td>Endereço</td>
+            <td><input type="text" [(ngModel)]="user.address"></td>
+            <td *ngIf="addressValid() == false" class="errors">*Endereço inválido</td>
+        </tr>
+
+        <tr>
+            <td>Telefone</td>
+            <td><input TelefoneMask type="text" [(ngModel)]="user.tel1" [textMask]="{mask: mask}"></td>
+            <td><button type="button" (click)="telAppears()" class="btn fourth">{{nameButton()}}</button></td>
+        </tr>
+
+        <tr *ngIf="user.tel2Exists == true">
+            <td>Telefone 2</td>
+            <td><input TelefoneMask type="text" [(ngModel)]="user.tel2" [textMask]="{mask: mask}"></td>
+        </tr>
+
+        <br>
+        <tr>
+            <td>Selecione o time</td>
+            <td>
+                <select [(ngModel)]="user.teamId" [ngClass]="getColorTeam(user.teamId)">
+                    <option value="0">--Selecione--</option>
+                    <option *ngFor="let team of teamsService.teams" value= {{team.id}}>{{team.name}}</option>
+                 </select>
+            </td>
+            <td><img [src]="getImageOfTeam()" width="70"></td>
+        </tr>
+        <br>
+
+        <tr [ngClass]="validUserName() ? 'backgroundRight' : 'backgroundErrors'">
+            <td>Nome de Usuario</td>
+            <td><input type="text" [(ngModel)]="user.username"></td>
+            <td *ngIf="validUserName() == false" class="errors">*Nome de usuário já existe</td>
+        </tr>
+
+        <tr [ngClass]="validPassword() ? 'backgroundRight' : 'backgroundErrors'">
+            <td>Criar senha</td>
+            <td><input type="password" [(ngModel)]="user.password"></td>
+        </tr>
+
+        <tr [ngClass]="validPassword() ? 'backgroundRight' : 'backgroundErrors'">
+            <td>Repetir senha</td>
+            <td><input type="password" [(ngModel)]="senha"></td>
+            <td *ngIf="validPassword() == false" class="errors">*Senhas não correspondem</td>
+        </tr>
+
+        <br>
+        <tr><button type="button" (click)="addUser()" [disabled]="userValid() == false" class="btn fourth">Adicionar Usuário</button></tr>
+    </tbody>
+</table>
+
+<script src="angular-input-masks-standalone.min.js"></script>
+
+<!--
+<div *ngIf="trabalhador.salary < 1000">
+    <label>Bônus</label>
+    <input type="text" [(ngModel)]="trabalhador.bonus" ><br>
+</div>
+-->
+

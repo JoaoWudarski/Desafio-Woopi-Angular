@@ -1,0 +1,20 @@
+
+<div *ngIf="userService.showLogin == true" class="main">
+    <div *ngIf="loginActive == false">
+        <h4>Nome de Usuário</h4>
+        <input type="text" [(ngModel)]="username">
+        <h4>Senha</h4>
+        <input type="password" [(ngModel)]="password">
+
+        <button type="button" (click)="login()">Fazer Login</button>
+    </div>
+
+    <div *ngIf="loginActive == true">
+        <h5>Ei, você {{loginUser.name}} {{loginUser.lastName}}, de {{loginUser.age}} anos, que mora na {{loginUser.address}} e que é fã da {{team}} eSports, obrigado por se cadastrar!!.
+            Assim que alguma informação da {{team}} sair, entraremos em contato por {{loginUser.email}} ou por SMS em {{loginUser.tel1}} como {{loginUser.username}}.
+            Obrigado!!
+        </h5>
+        <img [src]="getImageOfTeam()">
+        <button class="btn-hover" *ngIf="loginActive == true" type="button" (click)="logoff()"  >Deslogar</button>
+    </div>
+</div>

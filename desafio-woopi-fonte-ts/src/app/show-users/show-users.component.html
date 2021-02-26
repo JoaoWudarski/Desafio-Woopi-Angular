@@ -1,0 +1,35 @@
+
+
+<div *ngIf="userService.showUsers == true">
+    <h2>Usuarios Cadastrados</h2>
+    <table>
+        
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Nome de Usuário</th>
+                <th>Idade</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Telefone 2</th>
+                <th>Endereço</th>
+                <th>Senha</th>
+                <th>ID Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userService.users;let i=index;" [id]="'tr' +i">
+                <td>{{user.name}} {{user.lastName}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.age}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.tel1}}</td>
+                <td>{{user.tel2}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.teamId}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
